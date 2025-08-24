@@ -1,11 +1,14 @@
+import { modules } from "@modules/main";
+import config from "config";
 import express from "express";
-import usersModule from "./modules/users/users.module";
-import { modules } from "./modules/main";
 
 export function createApp() {
   const app = express();
 
-  app.use(express.json());
+  // Register global middlewares
+  for (const middleware of config.middlewares) {
+    app.use(middleware);
+  }
 
   // Register modules (each is a Router with prefix from @Controller)
   for (const module of modules) {

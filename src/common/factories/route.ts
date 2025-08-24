@@ -45,8 +45,15 @@ export function createRouter(ControllerClass: any): Router {
   for (const route of routes) {
     const { requestMethod, path, methodName } = route;
 
+    const routeMiddlewares =
+      Reflect.getMetadata("middlewares", ControllerClass, methodName) || [];
+    const controllerMiddlewares =
+      Reflect.getMetadata("middlewares", ControllerClass) || [];
+
     (router as any)[requestMethod](
       prefix + path,
+      ...controllerMiddlewares,
+      ...routeMiddlewares,
       async (req: Request, res: Response, next: NextFunction) => {
         try {
           const result = await (controller as any)[methodName](req, res, next);
