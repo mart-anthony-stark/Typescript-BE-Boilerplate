@@ -1,6 +1,5 @@
+import { modules } from "@modules/main";
 import express from "express";
-import usersModule from "./modules/users/users.module";
-import { modules } from "./modules/main";
 
 export function createApp() {
   const app = express();

@@ -1,7 +1,7 @@
+import { Controller } from "@common/decorators/controller";
 import { Request, Response } from "express";
-import { Get } from "../../common/factories/route";
-import { Controller } from "../../common/decorators/controller";
 import { UsersService } from "./users.service";
+import { Get } from "@common/factories/route";
 
 @Controller("/users")
 export class UsersController {
